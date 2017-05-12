@@ -1,0 +1,13 @@
+﻿<div id="popUpDialog-bg" ng-show="showPopUpDialog" ng-controller="ownerController">
+    <div id="popUpDialog">
+        <div class="content">
+            {{popUpDialogContent}}
+        </div>
+        <div class="pull-left">
+            <button class="btn btn-danger" ng-click="popUpDialogApprove()">YES</button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" ng-click="closePopUpDialog()">NO</button>
+            </div>
+        </div>
+    </div>

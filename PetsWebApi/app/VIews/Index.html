@@ -1,0 +1,68 @@
+﻿<script src="../../Scripts/dirPagination.js"></script>
+
+<div class="container" ng-controller="ownerController" ng-cloak>
+
+    <div class="col-md-4 col-md-offset-5">
+        <h3>List of Owners</h3>
+        <h5>Total count : {{totalOwnersCount}}</h5>
+
+    </div>
+    <div class="form-inline col-md-4 col-md-offset-5">
+        <form class="form-group form-horizontal" name="ownerForm" novalidate ng-submit="save(ownerName)">
+            <input id="ownerName" class="form-control" type="text" ng-model="ownerName" required placeholder="Enter Name" />
+            <input type="submit" class="btn btn-block btn-primary " value="Add Owner" ng-disabled="ownerForm.$invalid" />
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form class="form-inline">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+            </div>
+        </form>
+    </div>
+    <table class="table table-hover " ng-cloak>
+        <thead>
+        <tr>
+            <th style="display: none;">ID</th>
+
+            <th ng-click="sort('Name')">
+                Name
+                <span class="glyphicon sort-icon" ng-show="sortKey=='Name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('PetsCount')">
+                Pets Count
+                <span class="glyphicon sort-icon" ng-show="sortKey=='PetsCount'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="items in allOwner |orderBy:sortKey:reverse| filter:search |itemsPerPage:3 ">
+            <td hidden="hidden">{{items.Id}}</td>
+
+            <td>
+                <a href="#!/Owner/{{items.Id}}"> {{items.Name}} </a>
+            </td>
+            <td>
+                {{items.PetsCount}}
+            </td>
+            <td>
+            <input type="button" class="btn btn-default" value="Delete" ng-click="accesDialog(items.Id,items.Name);" />
+        </tr>
+        </tbody>
+    </table>
+    
+    <div class="col-md-4 col-md-offset-5">
+       <dir-pagination-controls max-size="5"
+                                 direction-links="true"
+                                 boundary-links="true">
+        </dir-pagination-controls>
+     
+        
+    </div>
+    <pop-up-dialog></pop-up-dialog>
+</div>
+
+   
+    
